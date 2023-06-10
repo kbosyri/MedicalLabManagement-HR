@@ -12,7 +12,7 @@ class Staff extends Authenticatable
 {
     use HasFactory,Notifiable,HasApiTokens;
 
-    protected $table='Staffs';
+    protected $table='Staff';
 
 
     public function schedule()

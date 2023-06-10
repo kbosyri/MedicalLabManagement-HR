@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Grants\GrantsRequest;
 use App\Http\Resources\Grants\GrantResource;
 use App\Models\Grant;
 use Illuminate\Http\Request;
 
 class GrantsController extends Controller
 {
-    public function AddGrant(Request $request)
+    public function AddGrant(GrantsRequest $request)
     {
         $grant = new Grant();
 

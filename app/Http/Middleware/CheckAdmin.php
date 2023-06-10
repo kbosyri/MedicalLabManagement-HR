@@ -16,13 +16,13 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->is_admin)
+        if(!Auth::user()->is_admin)
         {
             return response()->json([
                 'message'=>'غير مسموح لهذا المستخدم بالدخول'
             ],403);
         }
-        
+
         return $next($request);
     }
 }

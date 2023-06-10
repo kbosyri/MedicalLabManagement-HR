@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::middleware('check-admin')->group(function(){
         Route::delete('/grants/{id}',[GrantsController::class,'DeleteGrant']);
         Route::get('/grants',[GrantsController::class,'GetGrants']);
-        Route::get('/grant/{id}',[GrantsController::class,'GetGrant']);
+        Route::get('/grants/{id}',[GrantsController::class,'GetGrant']);
     });
 });
 
