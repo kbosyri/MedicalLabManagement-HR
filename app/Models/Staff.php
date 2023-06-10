@@ -3,22 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Staff extends Model
+class Staff extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,Notifiable,HasApiTokens;
+
     protected $table='Staffs';
 
 
     public function schedule()
     {
-return $this->hasMany(Employeeschedule::class);
+        return $this->hasMany(Employeeschedule::class);
     }
 
 
     public function leave()
     {
-return $this->hasMany(Leave::class);
+        return $this->hasMany(Leave::class);
     }
 }
