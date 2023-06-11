@@ -24,12 +24,13 @@ class EmployeescheduleRequest extends FormRequest
      */
     public function rules()
     {
+        $days = "Saturday,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday";
         return [
-            'staff_id'=>'required',
-            'day_of_week'=>'required',
-            'role'=>'required',
-            'start_time'=>'required',
-            'end_time'=>'required'
+            'role_id'=>['present'],
+            'main_role'=>['present'],
+            'days_of_week'=>['required','array','in:'.$days,],
+            'start_time'=>['required'],
+            'end_time'=>['required']
         ];
     }
 

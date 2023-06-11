@@ -21,16 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/show_all',[EmployeescheduleController::class,'show_all']);
-    Route::post('/create_empschedual',[EmployeescheduleController::class,'create_empschedual']);
-    Route::post('/update_empschedual/{id}',[EmployeescheduleController::class,'update_empschedual']);
-    });
+    Route::get('/schedules',[EmployeescheduleController::class,'show_all']);
+    Route::get('/schedules/{id}',[EmployeescheduleController::class,'GetSchedule']);
+    Route::post('/schedules',[EmployeescheduleController::class,'create_empschedual']);
+    Route::post('/schedules/{id}',[EmployeescheduleController::class,'update_empschedual']);
+});
 
-    Route::middleware('auth:sanctum')->group(function(){
-        Route::get('/index',[LeaveController::class,'index']);
-        Route::get('/show /{id}',[LeaveController::class,'show']);
-        Route::post('/create_leave',[LeaveController::class,'create_leave']);
-        Route::post('/update_leave/{id}',[LeaveController::class,'update_leave']);
-        });
-
-
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/index',[LeaveController::class,'index']);
+    Route::get('/show /{id}',[LeaveController::class,'show']);
+    Route::post('/create_leave',[LeaveController::class,'create_leave']);
+    Route::post('/update_leave/{id}',[LeaveController::class,'update_leave']);
+});

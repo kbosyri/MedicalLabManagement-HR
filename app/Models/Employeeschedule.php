@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Employeeschedule extends Model
 {
     use HasFactory;
-  
-    public function staff()
+
+    protected $casts = [
+        'days_of_week'=>'array',
+    ];
+
+    public function role()
     {
-        return $this->belongsTo(Staff::class);
+        return $this->belongsTo(Role::class,'role_id','id');
     }
 
 
