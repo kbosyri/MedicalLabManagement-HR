@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\developmentController;
 use App\Http\Controllers\EmployeescheduleController;
 use App\Http\Controllers\GrantsController;
 use App\Http\Controllers\LeaveController;
@@ -42,6 +43,8 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('/grants/{id}',[GrantsController::class,'GetGrant']);
     });
 });
+
+Route::get('/test/date',[developmentController::class,'Test']);
 
 
 
