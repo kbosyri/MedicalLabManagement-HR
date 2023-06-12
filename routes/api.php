@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeescheduleController;
+use App\Http\Controllers\GrantsController;
 use App\Http\Controllers\LeaveController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,16 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/create_leave',[LeaveController::class,'create_leave']);
     Route::post('/update_leave/{id}',[LeaveController::class,'update_leave']);
 });
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/grants',[GrantsController::class,'AddGrant']);
+    Route::middleware('check-admin')->group(function(){
+        Route::delete('/grants/{id}',[GrantsController::class,'DeleteGrant']);
+        Route::get('/grants',[GrantsController::class,'GetGrants']);
+        Route::get('/grants/{id}',[GrantsController::class,'GetGrant']);
+    });
+});
+
+
+
+

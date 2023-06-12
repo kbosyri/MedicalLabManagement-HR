@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Grants;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class GrantsRequest extends FormRequest
 {
@@ -11,7 +14,7 @@ class GrantsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->is_admin;
     }
 
     /**
@@ -25,5 +28,14 @@ class GrantsRequest extends FormRequest
             'name'=>['required'],
             'amount'=>['required']
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'=>false,
+            'message'=>'يوجد خطأ في القيم المدخلة',
+            'errors'=>$validator->errors()
+        ],400));
     }
 }
