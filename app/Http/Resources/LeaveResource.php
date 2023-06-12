@@ -17,7 +17,8 @@ class LeaveResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'start_time'=>$this->start_time,
+            'id'=>$this->id,
+            'start_date'=>$this->start_date,
             'duration'=>$this->duration,
             'is_paid'=>$this->is_paid,
             'is_accepted'=>$this->is_accepted,

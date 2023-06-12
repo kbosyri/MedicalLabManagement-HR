@@ -69,6 +69,13 @@ class LeaveController extends Controller
     {
         $leave= Leave ::find($id);
 
+        if(Auth::user()->id != $leave->staff_id)
+        {
+            return response()->json([
+                'message'=>'هذا المستخدم غير مسموح له بتعديل هذا الطلب'
+            ],400);
+        }
+
         $leave->is_paid=$request->is_paid;
         $leave->start_date=$request->start_date;
         $leave->duration=$request->duration;
@@ -93,7 +100,7 @@ class LeaveController extends Controller
         {
             $date = new Carbon($leave->start_date);
             $i = 0;
-            while($i<= $leave->duration)
+            while($i < $leave->duration)
             {
                 if($date->dayName == "Friday")
                 {
