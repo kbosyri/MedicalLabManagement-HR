@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Role\RoleStaffResource;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -16,13 +17,11 @@ class LeaveResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'staff_id'=> new Staff($this->Staff),
-            'leavetype'=>$this->leavetype,
             'start_time'=>$this->start_time,
-            'end_time'=>$this->end_time,
-            'duration'=>$this->duration
-            
-
+            'duration'=>$this->duration,
+            'is_paid'=>$this->is_paid,
+            'is_accepted'=>$this->is_accepted,
+            'staff_id'=> new RoleStaffResource($this->staff),
         ];
     }
 }

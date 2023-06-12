@@ -12,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('leave_dates', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Staff::class,'staff_id');
+            $table->date('date');
             $table->boolean('is_paid');
-            $table->boolean('is_accepted')->nullable();
-            $table->date('start_date');
-            $table->integer('duration');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('leave_dates');
     }
 };

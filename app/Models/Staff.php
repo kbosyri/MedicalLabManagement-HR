@@ -17,13 +17,16 @@ class Staff extends Authenticatable
     public function schedule()
     {
         return $this->hasMany(Employeeschedule::class);
-        return $this->hasMany(Employeeschedule::class);
     }
 
 
-    public function leave()
+    public function leaves()
     {
-        return $this->hasMany(Leave::class);
+        return $this->hasMany(LeaveDate::class);
+    }
+
+    public function leave_requests()
+    {
         return $this->hasMany(Leave::class);
     }
 }

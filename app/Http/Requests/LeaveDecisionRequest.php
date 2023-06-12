@@ -6,14 +6,14 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LeaveRequest extends FormRequest
+class LeaveDecisionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,12 +21,10 @@ class LeaveRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'is_paid' => 'required|boolean',
-            'start_date' => 'required|date',
-            'duration' => 'required|integer',
+            'decision'=>['required','boolean'],
         ];
     }
 
@@ -38,5 +36,4 @@ class LeaveRequest extends FormRequest
             'errors'=>$validator->errors()
         ],400));
     }
-
 }
