@@ -29,4 +29,9 @@ class Staff extends Authenticatable
     {
         return $this->hasMany(Leave::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'role_id','id');
+    }
 }
