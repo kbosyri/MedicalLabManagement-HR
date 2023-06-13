@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LeaveDecisionRequest;
 use App\Http\Requests\LeaveRequest;
 use App\Http\Resources\LeaveResource;
+use App\Http\Resources\Leaves\LeaveDateReportCollection;
+use App\Http\Resources\Leaves\LeaveDateResource;
 use App\Models\Leave;
 use App\Models\LeaveDate;
 use App\Models\Staff;
@@ -124,6 +126,50 @@ class LeaveController extends Controller
             'message'=>'تم تسجيل القرار لطلب العطلة',
             'leave_request'=>new LeaveResource($leave),
         ]);
+    }
+
+    public function LeaveReport(Request $request)
+    {
+        $leaves = LeaveDate::whereBetween('date',[$request->from_date,$request->to_date]);
+
+        if($request->first_name)
+        {
+            $staff = Staff::where('first_name',$request->first_name)->get(['id']);
+            $ids = [];
+            foreach($staff as $member)
+            {
+                array_push($ids,$member->id);
+            }
+            $leaves = $leaves->whereIn('staff_id',$ids);
+        }
+        if($request->last_name)
+        {
+            $staff = Staff::where('last_name',$request->last_name)->get(['id']);
+            $ids = [];
+            foreach($staff as $member)
+            {
+                array_push($ids,$member->id);
+            }
+            $leaves = $leaves->whereIn('staff_id',$ids);
+        }
+        if($request->father_name)
+        {
+            $staff = Staff::where('father_name',$request->father_name)->get(['id']);
+            $ids = [];
+            foreach($staff as $member)
+            {
+                array_push($ids,$member->id);
+            }
+            $leaves = $leaves->whereIn('staff_id',$ids);
+        }
+        if($request->is_paid)
+        {
+            $leaves = $leaves->where('is_paid',$request->is_paid);
+        }
+
+        $leaves = $leaves->get();
+        
+        return new LeaveDateReportCollection($leaves);
     }
 
 

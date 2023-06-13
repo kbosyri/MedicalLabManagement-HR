@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/staff/{id}/leaves',[LeaveController::class,'index']);
     Route::get('/user/leaves/requests',[LeaveController::class,'GetUserLeaveRequests']);
     Route::middleware('check-admin')->get('/leaves/requests/',[LeaveController::class,'GetLeaveRequests']);
+    Route::middleware('check-admin')->get('/leaves/reports',[LeaveController::class,'LeaveReport']);
     Route::get('/leaves/requests/{id}',[LeaveController::class,'GetLeaveRequest']);
     Route::post('/leaves/requests',[LeaveController::class,'create_leave_request']);
     Route::middleware('transaction')->post('/leaves/requests/{id}/decision',[LeaveController::class,'SendLeaveDecision']);
