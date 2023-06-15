@@ -48,4 +48,11 @@ class GrantsController extends Controller
 
         return new GrantResource($grant);
     }
+
+    public function GetGrantsInDates(Request $request)
+    {
+        $grants = Grant::whereBetween('created_at',[$request->from_date,$request->to_date])->get();
+
+        return GrantResource::collection($grants);
+    }
 }
