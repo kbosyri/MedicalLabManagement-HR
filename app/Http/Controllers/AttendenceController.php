@@ -18,6 +18,8 @@ class AttendenceController extends Controller
         $attendance->time = $request->time;
         $attendance->is_ending = false;
 
+        $attendance->save();
+
         return response()->json([
             'message'=>'تم تسجيل الحضور وبداية الدوام',
             'attendance'=>new AttendanceResource($attendance),
@@ -31,6 +33,8 @@ class AttendenceController extends Controller
         $attendance->staff_id = Auth::user()->id;
         $attendance->time = $request->time;
         $attendance->is_ending = true;
+
+        $attendance->save();
 
         return response()->json([
             'message'=>'تم تسجيل نهاية الدوام',
