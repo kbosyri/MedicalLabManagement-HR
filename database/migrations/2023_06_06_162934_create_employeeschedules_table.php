@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('employeeschedules', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Role::class,'role_id')->nullable();
-            $table->enum('main_role',['admin','lab_staff','reception'])->nullable();
+            $table->text('main_role');
             $table->string('days_of_week');
             $table->time('start_time');
             $table->time('end_time');

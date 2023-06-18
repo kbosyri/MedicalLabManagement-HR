@@ -6,6 +6,7 @@ use App\Http\Requests\EmployeescheduleRequest;
 use App\Http\Resources\EmployeescheduleResource;
 use App\Models\Staff;
 use App\Models\Employeeschedule;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class EmployeescheduleController extends Controller
@@ -25,10 +26,12 @@ class EmployeescheduleController extends Controller
     public function create_empschedual(EmployeescheduleRequest $request)
     {
         $empschedule=new Employeeschedule();
+        $role = Role::find($request->role_id);
 
         if($request->role_id)
         {
             $empschedule->role_id=$request->role_id;
+            $empschedule->main_role = $role->name;
         }
         else
         {
