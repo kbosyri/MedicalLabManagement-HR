@@ -6,6 +6,7 @@ use App\Http\Resources\Attendance\AttendanceResource;
 use App\Models\Attendence;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendenceController extends Controller
 {
@@ -13,7 +14,7 @@ class AttendenceController extends Controller
     {
         $attendance = new Attendence();
 
-        $attendance->staff_id = $request->staff_id;
+        $attendance->staff_id = Auth::user()->id;
         $attendance->time = $request->time;
         $attendance->is_ending = false;
 
@@ -27,7 +28,7 @@ class AttendenceController extends Controller
     {
         $attendance = new Attendence();
 
-        $attendance->staff_id = $request->staff_id;
+        $attendance->staff_id = Auth::user()->id;
         $attendance->time = $request->time;
         $attendance->is_ending = true;
 
