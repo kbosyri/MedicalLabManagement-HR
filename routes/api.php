@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\EmployeescheduleController;
 use App\Http\Controllers\GrantsController;
 use App\Http\Controllers\LeaveController;
@@ -52,6 +53,13 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 });
 
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/attendances/start',[AttendenceController::class,'AddAttendence']);
+    Route::post('/attendances/end',[AttendenceController::class,'AddAttendanceEnd']);
+
+    Route::get('/attendances/report',[AttendenceController::class,'GetAttendanceReport']);
+    Route::get('/staff/{id}/attendances',[AttendenceController::class,'GetStaffAttendance']);
+});
 
 
 
