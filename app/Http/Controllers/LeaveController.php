@@ -162,7 +162,7 @@ class LeaveController extends Controller
             }
             $leaves = $leaves->whereIn('staff_id',$ids);
         }
-        if($request->is_paid)
+        if($request->is_paid != null)
         {
             $leaves = $leaves->where('is_paid',$request->is_paid);
         }
