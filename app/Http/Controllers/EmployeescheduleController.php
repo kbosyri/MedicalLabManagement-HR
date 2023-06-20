@@ -54,9 +54,18 @@ class EmployeescheduleController extends Controller
     public function update_empschedual(EmployeescheduleRequest $request,$id)
     {
         $empschedule= Employeeschedule::find($id);
+        $role = Role::find($request->role_id);
 
-        $empschedule->role_id=$request->role_id;
-        $empschedule->main_role = $request->main_role;
+        if($request->role_id)
+        {
+            $empschedule->role_id=$request->role_id;
+            $empschedule->main_role = $role->name;
+        }
+        else
+        {
+            $empschedule->role_id=null;
+            $empschedule->main_role = $request->main_role;
+        }
         $empschedule->days_of_week=$request->days_of_week;
         $empschedule->start_time=$request->start_time;
         $empschedule->end_time=$request->end_time;
