@@ -16,7 +16,15 @@ class Staff extends Authenticatable
 
     public function schedule()
     {
-        return $this->hasMany(Employeeschedule::class);
+        if($this->is_reception)
+        {
+            return Employeeschedule::where("main_role","reception")->first();
+        }
+        else if($this->is_lab_staff)
+        {
+            return Employeeschedule::where("main_role","lab staff")->first();
+        }
+        return Employeeschedule::where('role_id',$this->role_id)->first();
     }
 
 
