@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Grants\GrantsRequest;
+use App\Http\Requests\ReportRequest;
 use App\Http\Resources\Grants\GrantResource;
 use App\Models\Grant;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class GrantsController extends Controller
         return new GrantResource($grant);
     }
 
-    public function GetGrantsInDates(Request $request)
+    public function GetGrantsInDates(ReportRequest $request)
     {
         $grants = Grant::whereBetween('created_at',[$request->from_date,$request->to_date])->get();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Http\Resources\Attendance\AttendanceResource;
 use App\Models\Attendence;
 use App\Models\Staff;
@@ -42,7 +43,7 @@ class AttendenceController extends Controller
         ]);
     }
 
-    public function GetAttendanceReport(Request $request)
+    public function GetAttendanceReport(ReportRequest $request)
     {
         $attendances = Attendence::whereBetween('time',[$request->from_date,$request->to_date]);
 

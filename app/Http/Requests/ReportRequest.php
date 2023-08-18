@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Grants;
+namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 
-class GrantsRequest extends FormRequest
+class ReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,10 +16,8 @@ class GrantsRequest extends FormRequest
     {
         if(Auth::user()->role)
         {
-            error_log("role");
-            if(Auth::user()->role->finance)
+            if(Auth::user()->role->reports)
             {
-                error_log("success");
                 return true;
             }
         }
@@ -34,8 +32,8 @@ class GrantsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required'],
-            'amount'=>['required']
+            'from_date'=>['required','date'],
+            'to_date'=>['required','date']
         ];
     }
 

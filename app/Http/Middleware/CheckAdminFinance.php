@@ -23,13 +23,12 @@ class CheckAdminFinance
                 return response()->json(['message'=>'المستخدم غير مسموح له باستخدام هذا الرابط'],403);
             }
         }
-        if(!Auth::user()->is_admin)
+        else if(!Auth::user()->is_admin)
         {
             return response()->json([
                 'message'=>'غير مسموح لهذا المستخدم بالدخول'
             ],403);
         }
-
         return $next($request);
     }
 }

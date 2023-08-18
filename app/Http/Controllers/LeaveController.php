@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeaveDecisionRequest;
 use App\Http\Requests\LeaveRequest;
+use App\Http\Requests\ReportRequest;
 use App\Http\Resources\LeaveResource;
 use App\Http\Resources\Leaves\LeaveDateReportCollection;
 use App\Http\Resources\Leaves\LeaveDateResource;
@@ -128,7 +129,7 @@ class LeaveController extends Controller
         ]);
     }
 
-    public function LeaveReport(Request $request)
+    public function LeaveReport(ReportRequest $request)
     {
         $leaves = LeaveDate::whereBetween('date',[$request->from_date,$request->to_date]);
 

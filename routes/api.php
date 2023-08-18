@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/staff/{id}/leaves',[LeaveController::class,'index']);
     Route::get('/user/leaves/requests',[LeaveController::class,'GetUserLeaveRequests']);
     Route::middleware('check-admin')->get('/leaves/requests/',[LeaveController::class,'GetLeaveRequests']);
-    Route::middleware('check-admin')->get('/leaves/reports',[LeaveController::class,'LeaveReport']);
+    Route::middleware(['check-admin','check-admin-reports'])->get('/leaves/reports',[LeaveController::class,'LeaveReport']);
     Route::get('/leaves/requests/{id}',[LeaveController::class,'GetLeaveRequest']);
     Route::post('/leaves/requests',[LeaveController::class,'create_leave_request']);
     Route::middleware('transaction')->post('/leaves/requests/{id}/decision',[LeaveController::class,'SendLeaveDecision']);
@@ -48,17 +48,17 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::middleware('check-admin-finance')->group(function(){
         Route::delete('/grants/{id}',[GrantsController::class,'DeleteGrant']);
         Route::get('/grants',[GrantsController::class,'GetGrants']);
+        Route::middleware('check-admin-reports')->get('/grants/report',[GrantsController::class,'GetGrantsInDates']);
         Route::get('/grants/{id}',[GrantsController::class,'GetGrant']);
+        
     });
-
-    Route::middleware('heck-admin-reports')->get('/grants/report',[GrantsController::class,'GetGrantsInDates']);
 });
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/attendances/start',[AttendenceController::class,'AddAttendence']);
     Route::post('/attendances/end',[AttendenceController::class,'AddAttendanceEnd']);
 
-    Route::get('/attendances/report',[AttendenceController::class,'GetAttendanceReport']);
+    Route::middleware(['check-admin','check-admin-reports'])->get('/attendances/report',[AttendenceController::class,'GetAttendanceReport']);
     Route::get('/staff/{id}/attendances',[AttendenceController::class,'GetStaffAttendance']);
 });
 
