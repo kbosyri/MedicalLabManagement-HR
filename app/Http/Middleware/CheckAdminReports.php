@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckAdminReports
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckAdmin
     {
         if(Auth::user()->role)
         {
-            if(!Auth::user()->role->human_resources)
+            if(!Auth::user()->role->reports)
             {
                 return response()->json(['message'=>'المستخدم غير مسموح له باستخدام هذا الرابط'],403);
             }

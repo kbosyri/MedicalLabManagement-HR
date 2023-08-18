@@ -16,6 +16,13 @@ class Employeeschedule
      */
     public function handle(Request $request, Closure $next)
     {
+        if(Auth::user()->role)
+        {
+            if(!Auth::user()->role->human_resources)
+            {
+                return response()->json(['message'=>'المستخدم غير مسموح له باستخدام هذا الرابط'],403);
+            }
+        }
         if(!Auth::user()->is_admin)
         {
             return response()->json(['message'=>'المستخدم غير مسموح له باستخدام هذا الرابط'],403);

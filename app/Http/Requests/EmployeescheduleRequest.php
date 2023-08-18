@@ -14,6 +14,13 @@ class EmployeescheduleRequest extends FormRequest
      */
     public function authorize()
     {
+        if(Auth::user()->role)
+        {
+            if(Auth::user()->role->human_resources)
+            {
+                return true;
+            }
+        }
         return Auth::user()->is_admin;
     }
 

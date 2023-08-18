@@ -45,12 +45,13 @@ Route::middleware('auth:sanctum')->group(function(){
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/grants',[GrantsController::class,'AddGrant']);
 
-    Route::middleware('check-admin')->group(function(){
+    Route::middleware('check-admin-finance')->group(function(){
         Route::delete('/grants/{id}',[GrantsController::class,'DeleteGrant']);
         Route::get('/grants',[GrantsController::class,'GetGrants']);
-        Route::get('/grants/report',[GrantsController::class,'GetGrantsInDates']);
         Route::get('/grants/{id}',[GrantsController::class,'GetGrant']);
     });
+
+    Route::middleware('heck-admin-reports')->get('/grants/report',[GrantsController::class,'GetGrantsInDates']);
 });
 
 Route::middleware('auth:sanctum')->group(function(){
